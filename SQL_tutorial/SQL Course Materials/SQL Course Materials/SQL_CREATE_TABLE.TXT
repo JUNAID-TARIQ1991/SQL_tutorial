@@ -1,0 +1,57 @@
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `order_date` date NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `comments` varchar(2000) DEFAULT NULL,
+  `shipped_date` date DEFAULT NULL,
+  `shipper_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `fk_orders_customers_idx` (`customer_id`),
+  KEY `fk_orders_shippers_idx` (`shipper_id`),
+  KEY `fk_orders_order_statuses_idx` (`status`),
+  CONSTRAINT `fk_orders_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE,
+  CONSTRAINT `fk_orders_order_statuses` FOREIGN KEY (`status`) REFERENCES `order_statuses` (`order_status_id`) ON UPDATE CASCADE,
+  CONSTRAINT `fk_orders_shippers` FOREIGN KEY (`shipper_id`) REFERENCES `shippers` (`shipper_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `orders` VALUES (1,6,'2019-01-30',1,NULL,NULL,NULL);
+INSERT INTO `orders` VALUES (2,7,'2018-08-02',2,NULL,'2018-08-03',4);
+INSERT INTO `orders` VALUES (3,8,'2017-12-01',1,NULL,NULL,NULL);
+INSERT INTO `orders` VALUES (4,2,'2017-01-22',1,NULL,NULL,NULL);
+INSERT INTO `orders` VALUES (5,5,'2017-08-25',2,'','2017-08-26',3);
+INSERT INTO `orders` VALUES (6,10,'2018-11-18',1,'Aliquam erat volutpat. In congue.',NULL,NULL);
+INSERT INTO `orders` VALUES (7,2,'2018-09-22',2,NULL,'2018-09-23',4);
+INSERT INTO `orders` VALUES (8,5,'2018-06-08',1,'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.',NULL,NULL);
+INSERT INTO `orders` VALUES (9,10,'2017-07-05',2,'Nulla mollis molestie lorem. Quisque ut erat.','2017-07-06',1);
+INSERT INTO `orders` VALUES (10,6,'2018-04-22',2,NULL,'2018-04-23',2);
+
+Notes: Here's what each part of the code does:
+
+CREATE TABLE statement: This starts the creation of the "orders" table.
+
+Column definitions: Each column of the table is defined with a name, data type, and optional constraints.
+
+order_id is defined as an integer (int) column with a length of 11. It is set as the primary key of the table and has the AUTO_INCREMENT attribute, which means that the database will automatically generate a unique value for this column when a new row is inserted.
+
+customer_id is an integer column of length 11 and is defined as NOT NULL, meaning it cannot be empty or null.
+
+order_date is a column of type date and is also defined as NOT NULL.
+
+status is a tinyint column with a length of 4. It is defined as NOT NULL and has a default value of '1' assigned to it.
+
+comments is a varchar column with a length of 2000 characters. It is allowed to be null (default value is NULL).
+
+shipped_date is a date column that is allowed to be null.
+
+shipper_id is a smallint column with a length of 6, and it is allowed to be null.
+
+Primary key: The PRIMARY KEY constraint is applied to the order_id column, which means it will uniquely identify each row in the table.
+
+Indexes: The KEY statements define indexes for the customer_id, shipper_id, and status columns. Indexes improve the query performance when searching or sorting based on these columns.
+
+Foreign key constraints: The CONSTRAINT statements define foreign key constraints that enforce referential integrity between the "orders" table and other tables (customers, order_statuses, and shippers). It ensures that the values in the specified columns (customer_id, status, and shipper_id) in the "orders" table must exist in the respective referenced tables. The ON UPDATE CASCADE specifies that if the referenced values are updated in the referenced tables, the changes will be cascaded to the "orders" table.
+
+Engine and character set: The ENGINE and DEFAULT CHARSET statements define the storage engine (InnoDB) and character set (utf8mb4) for the table.
+
+Auto-increment value: The AUTO_INCREMENT statement sets the initial auto-increment value for the order_id column to 11."

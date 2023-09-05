@@ -1,0 +1,3 @@
+update invoices_with_balance
+set payment_total=invoice_total
+where invoice_id=2;

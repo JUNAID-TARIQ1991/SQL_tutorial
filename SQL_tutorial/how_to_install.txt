@@ -1,0 +1,4 @@
+To install mysql server on your linux machine please follow the given commanda in the followinf link.
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
+This is also very useful:
+https://linuxhint.com/installing_mysql_workbench_ubuntu/
